@@ -1,42 +1,59 @@
+body {
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #0f172a 0%, #312e81 50%, #1e3a8a 100%);
+  min-height: 100vh;
+  color: #e0e7ef;
+}
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  min-height: 100vh;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.modern-card {
+  background: rgba(255,255,255,0.15);
+  border-radius: 2rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 2.5rem;
+  margin-bottom: 2rem;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.modern-btn {
+  background: linear-gradient(90deg, #06b6d4 0%, #6366f1 100%);
+  color: #fff;
+  border: none;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 0.75rem 2.5rem;
+  box-shadow: 0 4px 16px 0 rgba(31, 38, 135, 0.17);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.modern-btn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.27);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.modern-label {
+  color: #a5b4fc;
+  font-weight: 600;
+  font-size: 0.95rem;
 }
 
-.card {
-  padding: 2em;
+.modern-textarea {
+  background: rgba(255,255,255,0.25);
+  border-radius: 1.25rem;
+  border: none;
+  color: #1e293b;
+  font-size: 1.1rem;
+  padding: 1.25rem;
+  box-shadow: 0 2px 8px 0 rgba(31, 38, 135, 0.07);
+  resize: none;
+  outline: none;
+  transition: box-shadow 0.2s;
 }
-
-.read-the-docs {
-  color: #888;
+.modern-textarea:focus {
+  box-shadow: 0 4px 16px 0 #06b6d4;
 }
