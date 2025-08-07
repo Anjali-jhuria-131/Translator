@@ -116,191 +116,175 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
-            Language Translator
-          </h1>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Translate text between languages instantly with our powerful translation tool
-          </p>
-        </div>
-
-        {/* Main Translation Interface */}
-        <div className="max-w-6xl mx-auto">
-          <Card className="backdrop-blur-sm bg-white/80 border-0 shadow-2xl">
-            <div className="p-8">
-              {/* Language Selectors */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">From</label>
-                  <Select value={sourceLang} onValueChange={setSourceLang}>
-                    <SelectTrigger className="h-12 bg-white/70 border-gray-200">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {languages.map((lang) => (
-                        <SelectItem key={lang.code} value={lang.code}>
-                          {lang.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="flex items-end justify-center">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={swapLanguages}
-                    className="h-12 w-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white border-0 hover:from-blue-600 hover:to-purple-600 transition-all duration-300 shadow-lg hover:shadow-xl"
-                  >
-                    <ArrowLeftRight className="h-5 w-5" />
-                  </Button>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">To</label>
-                  <Select value={targetLang} onValueChange={setTargetLang}>
-                    <SelectTrigger className="h-12 bg-white/70 border-gray-200">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {languages.map((lang) => (
-                        <SelectItem key={lang.code} value={lang.code}>
-                          {lang.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-
-              {/* Translation Text Areas */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Source Text */}
-                <div className="space-y-4">
-                  <div className="relative">
-                    <Textarea
-                      placeholder="Enter text to translate..."
-                      value={sourceText}
-                      onChange={(e) => setSourceText(e.target.value)}
-                      className="min-h-[200px] text-lg bg-white/70 border-gray-200 resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    />
-                    <div className="absolute bottom-3 right-3 flex gap-2">
-                      {sourceText && (
-                        <>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => speakText(sourceText, sourceLang)}
-                            className="h-8 w-8 p-0 hover:bg-blue-100"
-                          >
-                            <Volume2 className="h-4 w-4" />
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => copyToClipboard(sourceText)}
-                            className="h-8 w-8 p-0 hover:bg-blue-100"
-                          >
-                            <Copy className="h-4 w-4" />
-                          </Button>
-                        </>
-                      )}
-                    </div>
-                  </div>
-                  <div className="flex justify-between items-center text-sm text-gray-500">
-                    <span>{sourceText.length} characters</span>
-                  </div>
-                </div>
-
-                {/* Translated Text */}
-                <div className="space-y-4">
-                  <div className="relative">
-                    <Textarea
-                      placeholder="Translation will appear here..."
-                      value={translatedText}
-                      readOnly
-                      className="min-h-[200px] text-lg bg-gray-50/70 border-gray-200 resize-none"
-                    />
-                    <div className="absolute bottom-3 right-3 flex gap-2">
-                      {translatedText && (
-                        <>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => speakText(translatedText, targetLang)}
-                            className="h-8 w-8 p-0 hover:bg-purple-100"
-                          >
-                            <Volume2 className="h-4 w-4" />
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => copyToClipboard(translatedText)}
-                            className="h-8 w-8 p-0 hover:bg-purple-100"
-                          >
-                            <Copy className="h-4 w-4" />
-                          </Button>
-                        </>
-                      )}
-                    </div>
-                  </div>
-                  <div className="flex justify-between items-center text-sm text-gray-500">
-                    <span>{translatedText.length} characters</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Translate Button */}
-              <div className="mt-8 text-center">
-                <Button
-                  onClick={handleTranslate}
-                  disabled={isTranslating || !sourceText.trim()}
-                  className="px-12 py-3 text-lg bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white border-0 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50"
-                >
-                  {isTranslating ? (
+    <div className="min-h-screen bg-gradient-to-tr from-slate-900 via-indigo-900 to-blue-900 flex flex-col items-center justify-center font-sans">
+      {/* Modern Glassy Card Layout */}
+      <div className="w-full max-w-7xl px-4 py-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        {/* Left: Main Translator Card */}
+        <Card className="rounded-3xl shadow-2xl bg-white/20 backdrop-blur-lg border border-white/30 p-10 flex flex-col gap-8">
+          <div className="mb-2">
+            <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 drop-shadow-lg mb-2 tracking-tight">Modern Translator</h1>
+            <p className="text-lg text-slate-200/80 font-medium">Translate text between languages instantly with a beautiful, modern interface.</p>
+          </div>
+          {/* Language Selectors */}
+          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+            <div className="w-full md:w-1/3">
+              <label className="text-xs font-semibold text-slate-200 mb-1 block">From</label>
+              <Select value={sourceLang} onValueChange={setSourceLang}>
+                <SelectTrigger className="h-12 bg-white/40 border-0 rounded-xl text-base font-semibold text-slate-800">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {languages.map((lang) => (
+                    <SelectItem key={lang.code} value={lang.code}>
+                      {lang.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="flex items-center justify-center my-2 md:my-0">
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={swapLanguages}
+                className="h-12 w-12 rounded-full bg-gradient-to-br from-cyan-400 to-indigo-400 text-white border-0 shadow-lg hover:scale-110 hover:rotate-180 transition-all duration-300"
+                aria-label="Swap languages"
+              >
+                <ArrowLeftRight className="h-6 w-6" />
+              </Button>
+            </div>
+            <div className="w-full md:w-1/3">
+              <label className="text-xs font-semibold text-slate-200 mb-1 block">To</label>
+              <Select value={targetLang} onValueChange={setTargetLang}>
+                <SelectTrigger className="h-12 bg-white/40 border-0 rounded-xl text-base font-semibold text-slate-800">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {languages.map((lang) => (
+                    <SelectItem key={lang.code} value={lang.code}>
+                      {lang.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          {/* Text Areas */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Source Text */}
+            <div className="flex flex-col gap-2">
+              <Textarea
+                placeholder="Enter text to translate..."
+                value={sourceText}
+                onChange={(e) => setSourceText(e.target.value)}
+                className="min-h-[160px] text-base bg-white/60 border-0 rounded-2xl shadow-inner focus:ring-2 focus:ring-cyan-400 focus:border-transparent text-slate-800 placeholder:text-slate-400"
+              />
+              <div className="flex justify-between items-center text-xs text-slate-300">
+                <span>{sourceText.length} characters</span>
+                <div className="flex gap-2">
+                  {sourceText && (
                     <>
-                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                      Translating...
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => speakText(sourceText, sourceLang)}
+                        className="h-8 w-8 p-0 hover:bg-cyan-100/60"
+                        aria-label="Speak source text"
+                      >
+                        <Volume2 className="h-4 w-4" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => copyToClipboard(sourceText)}
+                        className="h-8 w-8 p-0 hover:bg-cyan-100/60"
+                        aria-label="Copy source text"
+                      >
+                        <Copy className="h-4 w-4" />
+                      </Button>
                     </>
-                  ) : (
-                    'Translate'
                   )}
-                </Button>
+                </div>
               </div>
             </div>
-          </Card>
-
-          {/* Features */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-            <Card className="p-6 text-center bg-white/60 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-              <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <ArrowLeftRight className="h-6 w-6 text-white" />
+            {/* Translated Text */}
+            <div className="flex flex-col gap-2">
+              <Textarea
+                placeholder="Translation will appear here..."
+                value={translatedText}
+                readOnly
+                className="min-h-[160px] text-base bg-white/30 border-0 rounded-2xl shadow-inner text-slate-800 placeholder:text-slate-400"
+              />
+              <div className="flex justify-between items-center text-xs text-slate-300">
+                <span>{translatedText.length} characters</span>
+                <div className="flex gap-2">
+                  {translatedText && (
+                    <>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => speakText(translatedText, targetLang)}
+                        className="h-8 w-8 p-0 hover:bg-indigo-100/60"
+                        aria-label="Speak translated text"
+                      >
+                        <Volume2 className="h-4 w-4" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => copyToClipboard(translatedText)}
+                        className="h-8 w-8 p-0 hover:bg-indigo-100/60"
+                        aria-label="Copy translated text"
+                      >
+                        <Copy className="h-4 w-4" />
+                      </Button>
+                    </>
+                  )}
+                </div>
               </div>
-              <h3 className="font-semibold text-gray-800 mb-2">Instant Translation</h3>
-              <p className="text-gray-600 text-sm">Get accurate translations between multiple languages in seconds</p>
-            </Card>
-
-            <Card className="p-6 text-center bg-white/60 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-              <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Volume2 className="h-6 w-6 text-white" />
-              </div>
-              <h3 className="font-semibold text-gray-800 mb-2">Text-to-Speech</h3>
-              <p className="text-gray-600 text-sm">Listen to the pronunciation of translated text</p>
-            </Card>
-
-            <Card className="p-6 text-center bg-white/60 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-              <div className="w-12 h-12 bg-gradient-to-r from-pink-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Copy className="h-6 w-6 text-white" />
-              </div>
-              <h3 className="font-semibold text-gray-800 mb-2">Easy Copy</h3>
-              <p className="text-gray-600 text-sm">Copy translations to clipboard with one click</p>
-            </Card>
+            </div>
           </div>
+          {/* Translate Button */}
+          <div className="mt-4 flex justify-center">
+            <Button
+              onClick={handleTranslate}
+              disabled={isTranslating || !sourceText.trim()}
+              className="px-10 py-3 text-lg bg-gradient-to-r from-cyan-400 to-indigo-400 hover:from-cyan-500 hover:to-indigo-500 text-white border-0 rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 disabled:opacity-50 font-bold tracking-wide"
+            >
+              {isTranslating ? (
+                <>
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                  Translating...
+                </>
+              ) : (
+                'Translate'
+              )}
+            </Button>
+          </div>
+        </Card>
+        {/* Right: Features & Info */}
+        <div className="flex flex-col gap-8">
+          <Card className="rounded-3xl bg-gradient-to-br from-indigo-800/80 to-blue-800/80 border-0 shadow-xl p-8 flex flex-col items-center text-center gap-4">
+            <div className="w-16 h-16 bg-gradient-to-br from-cyan-400 to-indigo-400 rounded-full flex items-center justify-center mb-2 shadow-lg">
+              <ArrowLeftRight className="h-8 w-8 text-white" />
+            </div>
+            <h3 className="font-bold text-xl text-white mb-1">Instant Translation</h3>
+            <p className="text-slate-200/80 text-base">Get accurate translations between multiple languages in seconds.</p>
+          </Card>
+          <Card className="rounded-3xl bg-gradient-to-br from-cyan-800/80 to-indigo-700/80 border-0 shadow-xl p-8 flex flex-col items-center text-center gap-4">
+            <div className="w-16 h-16 bg-gradient-to-br from-indigo-400 to-cyan-400 rounded-full flex items-center justify-center mb-2 shadow-lg">
+              <Volume2 className="h-8 w-8 text-white" />
+            </div>
+            <h3 className="font-bold text-xl text-white mb-1">Text-to-Speech</h3>
+            <p className="text-slate-200/80 text-base">Listen to the pronunciation of translated text.</p>
+          </Card>
+          <Card className="rounded-3xl bg-gradient-to-br from-blue-800/80 to-cyan-800/80 border-0 shadow-xl p-8 flex flex-col items-center text-center gap-4">
+            <div className="w-16 h-16 bg-gradient-to-br from-indigo-400 to-blue-400 rounded-full flex items-center justify-center mb-2 shadow-lg">
+              <Copy className="h-8 w-8 text-white" />
+            </div>
+            <h3 className="font-bold text-xl text-white mb-1">Easy Copy</h3>
+            <p className="text-slate-200/80 text-base">Copy translations to clipboard with one click.</p>
+          </Card>
         </div>
       </div>
     </div>
